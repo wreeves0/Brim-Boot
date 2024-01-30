@@ -11,6 +11,7 @@ django.setup()
 
 # Import models from shoes_rest, here.
 # from shoes_rest.models import Something
+from shoes_rest.models import 
 
 def poll():
     while True:
