@@ -16,3 +16,8 @@ class Hat(models.Model):
     #     related_name="hats",
     #     on_delete=models.CASCADE,
     # )
+
+    def __str__(self):
+        return f"{self.id} - {self.fabric}/{self.style_name}/{self.color}"
+
+    
