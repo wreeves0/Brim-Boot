@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.decorators.http import require_http_methods
 import json
 from django.http import JsonResponse
@@ -22,12 +22,11 @@ class HatListEncoder(ModelEncoder):
         "style_name",
         "color",
         "picture_url",
+        "location",
     ]
-    #     "location",
-    # ]
-    # encoders = {
-    #     "location": LocationVODetailEncoder(),
-    # }
+    encoders = {
+        "location": LocationVODetailEncoder(),
+    }
 
 # Create your views here.
 
@@ -40,9 +39,22 @@ def api_list_hats(request):
             encoder=HatListEncoder,
             safe=False,
         )
-    else:
+    else: # POST
         content = json.loads(request.body)
+        print("Content: ", content)
+
+        try:
+            location_id = content["location"]
+            location = LocationVO.objects.get(id=location_id)
+            content["location"] = location
+        except LocationVO.DoesNotExist:
+            return JsonResponse(
+                {"message": "Invalid location id"},
+                status=400,
+            )
+
         hat = Hat.objects.create(**content)
+
         return JsonResponse(
             hat,
             encoder=HatListEncoder,

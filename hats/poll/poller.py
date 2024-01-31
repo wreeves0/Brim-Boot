@@ -12,17 +12,13 @@ django.setup()
 # Import models from hats_rest, here.
 from hats_rest.models import LocationVO
 
-# from hats.api.hats_rest.models import LocationVO
-
 def poll():
     while True:
-        print('Hats poller polling for data huh')
-        print("does it need single quotes try this")
+        print('Hats poller polling for data')
         try:
             print("Attempting to fetch data from wardrobe-api...")
             response = requests.get("http://wardrobe-api:8000/api/locations")
             print(f"Response Status: {response.status_code}")
-            print(f"Response Headers: {response.headers}")
 
             content = json.loads(response.content)
 
