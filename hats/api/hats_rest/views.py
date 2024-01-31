@@ -22,11 +22,12 @@ class HatListEncoder(ModelEncoder):
         "style_name",
         "color",
         "picture_url",
-        "location",
     ]
-    encoders = {
-        "location": LocationVODetailEncoder(),
-    }
+    #     "location",
+    # ]
+    # encoders = {
+    #     "location": LocationVODetailEncoder(),
+    # }
 
 # Create your views here.
 
@@ -36,6 +37,14 @@ def api_list_hats(request):
         hats = Hat.objects.all()
         return JsonResponse(
             {"hats": hats},
+            encoder=HatListEncoder,
+            safe=False,
+        )
+    else:
+        content = json.loads(request.body)
+        hat = Hat.objects.create(**content)
+        return JsonResponse(
+            hat,
             encoder=HatListEncoder,
             safe=False,
         )
