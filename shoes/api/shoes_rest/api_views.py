@@ -25,7 +25,9 @@ class ShoeDetailEncoder(ModelEncoder):
                 "model_name",
                 "color",
                 "picture_url",
+                "id",
                 "bin",
+
                 ]
     encoders = {
         "bin": BinVODetailEncoder(),
@@ -47,11 +49,13 @@ def api_list_shoe(request, bin_vo_id=None):
 
     else:
         content = json.loads(request.body)
+        print(content)
 
         try:
-            bin_href = f"/api/bins/{bin_vo_id}/"
-            bin = BinVO.objects.get(import_href=bin_href)
-            content["bin"] = bin
+            if "bin" in content:
+                bin_id = content["bin"]
+                bin = BinVO.objects.get(id=bin_id)
+                content["bin"] = bin
         except BinVO.DoesNotExist:
             return JsonResponse(
                 {"message": "Invalid bin id"},
@@ -64,6 +68,7 @@ def api_list_shoe(request, bin_vo_id=None):
             encoder=ShoeDetailEncoder,
             safe=False
             )
+
 
 
 
