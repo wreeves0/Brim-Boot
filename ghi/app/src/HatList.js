@@ -1,5 +1,15 @@
+import React, { useState, useEffect } from 'react';
 
-function HatList(props) {
+function HatList() {
+    const [hats, setHats] = useState([]);
+
+    useEffect(() => {
+        fetch("http://localhost:8090/api/hats/")
+            .then(response => response.json())
+            .then(data => setHats(data.hats))
+            .catch(error => console.error('Error:', error));
+    }, []);
+
     return (
         <table>
             <thead>
@@ -11,16 +21,16 @@ function HatList(props) {
                 </tr>
             </thead>
             <tbody>
-                {/* {props.hats.map(hat => {
+                {hats.map(hat => {
                     return (
-                        <tr key={hat.href}>
+                        <tr key={hat.id}>
                             <td>{hat.fabric}</td>
                             <td>{hat.style_name}</td>
                             <td>{hat.color}</td>
-                            <td>{hat.location}</td>
+                            <td>{hat.location ? hat.location.import_href : 'No location'}</td>
                         </tr>
                     )
-                } )} */}
+                } )}
             </tbody>
         </table>
     )
