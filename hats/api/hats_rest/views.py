@@ -41,7 +41,6 @@ def api_list_hats(request):
         )
     else: # POST
         content = json.loads(request.body)
-        print("Content: ", content)
 
         try:
             location_id = content["location"]
