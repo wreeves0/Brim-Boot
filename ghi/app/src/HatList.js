@@ -3,15 +3,21 @@ import React, { useState, useEffect } from 'react';
 function HatList() {
     const [hats, setHats] = useState([]);
 
-    useEffect(() => {
-        fetch("http://localhost:8090/api/hats/")
-            .then(response => response.json())
-            .then(data => setHats(data.hats))
-            .catch(error => console.error('Error:', error));
-    }, []);
+    const getData = async () => {
+        const response = await fetch("http://localhost:8090/api/hats");
+
+        if (response.ok) {
+            const data = await response.json();
+            setHats(data.hats);
+        }
+    }
+
+    useEffect(()=>{
+        getData()
+    }, [])
 
     return (
-        <table>
+        <table className="table table-striped">
             <thead>
                 <tr>
                     <th>Fabric</th>
