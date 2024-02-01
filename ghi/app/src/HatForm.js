@@ -1,6 +1,8 @@
+
+
 function HatForm() {
     return (
-        <p>HELLO IS THIS WORKING</p>
+        <p>HatForm</p>
     )
 }
 
