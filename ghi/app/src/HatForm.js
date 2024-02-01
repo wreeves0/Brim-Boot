@@ -88,7 +88,7 @@ function HatForm() {
                   <label htmlFor="color">Color</label>
                 </div>
                 <div className="form-floating mb-3">
-                  <input value={formData.picture_url} onChange={handleFormChange} placeholder="Picture URL" required type="text" name="picture_url" id="picture_url" className="form-control" />
+                  <input value={formData.picture_url} onChange={handleFormChange} placeholder="https://example.com" required type="url" name="picture_url" id="picture_url" className="form-control" />
                   <label htmlFor="picture_url">Picture URL</label>
                 </div>
                 <div className="mb-3">

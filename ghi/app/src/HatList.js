@@ -33,6 +33,18 @@ function HatList() {
         fetchLocations();
     }, []);
 
+    async function handleDelete(e) {
+        const id = e.target.dataset.id
+
+        const fetchOptions = { method: "DELETE" }
+        const request = await fetch(`http://localhost:8090/api/hats/${id}/`, fetchOptions)
+        if (request.ok) {
+            const data = await request.json()
+            alert(`Item has been deleted`)
+        }
+        fetchHats();
+    }
+
     return (
         <div className="shadow p-4 mt-4">
             <h1>Hat List</h1>
@@ -43,6 +55,7 @@ function HatList() {
                         <th>Style Name</th>
                         <th>Color</th>
                         <th>Location</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,6 +67,7 @@ function HatList() {
                                 <td>{hat.style_name}</td>
                                 <td>{hat.color}</td>
                                 <td>{locationString || 'Loading location...'}</td>
+                                <td><button data-id={hat.id} onClick={handleDelete} className="btn btn-danger">Delete</button></td>
                             </tr>
                         )
                     } )}
