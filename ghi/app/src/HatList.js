@@ -17,28 +17,31 @@ function HatList() {
     }, [])
 
     return (
-        <table className="table table-striped">
-            <thead>
-                <tr>
-                    <th>Fabric</th>
-                    <th>Style Name</th>
-                    <th>Color</th>
-                    <th>Location</th>
-                </tr>
-            </thead>
-            <tbody>
-                {hats.map(hat => {
-                    return (
-                        <tr key={hat.id}>
-                            <td>{hat.fabric}</td>
-                            <td>{hat.style_name}</td>
-                            <td>{hat.color}</td>
-                            <td>{hat.location ? hat.location.import_href : 'No location'}</td>
-                        </tr>
-                    )
-                } )}
-            </tbody>
-        </table>
+        <div className="shadow p-4 mt-4">
+            <h1>Hat List</h1>
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Fabric</th>
+                        <th>Style Name</th>
+                        <th>Color</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {hats.map(hat => {
+                        return (
+                            <tr key={hat.id}>
+                                <td>{hat.fabric}</td>
+                                <td>{hat.style_name}</td>
+                                <td>{hat.color}</td>
+                                <td>{hat.location ? hat.location.import_href : 'No location'}</td>
+                            </tr>
+                        )
+                    } )}
+                </tbody>
+            </table>
+        </div>
     )
 }
 
