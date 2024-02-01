@@ -3,7 +3,7 @@ import MainPage from './MainPage';
 import Nav from './Nav';
 import HatList from "./HatList";
 import HatForm from "./HatForm";
-import ShoesList from './ShoesList';
+import ShoeList from './ShoeList';
 
 function App() {
   // if (props.hats === undefined) {
@@ -16,6 +16,9 @@ function App() {
       <div className="container">
         <Routes>
           <Route path="/" element={<MainPage />} />
+          <Route path="/hats" element={<HatList /> } />
+          <Route path="/hats/new" element={<HatForm /> } />
+          <Route path="/shoes" element={<ShoeList /> } />
         </Routes>
       </div>
     </BrowserRouter>
