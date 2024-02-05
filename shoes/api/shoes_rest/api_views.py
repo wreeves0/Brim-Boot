@@ -5,7 +5,6 @@ import json
 from .models import Shoe, BinVO
 from common.json import ModelEncoder
 
-# Create your views here.
 class BinVODetailEncoder(ModelEncoder):
     model = BinVO
     properties = ["closet_name", "import_href"]
@@ -13,7 +12,7 @@ class BinVODetailEncoder(ModelEncoder):
 
 class ShoeListEncoder(ModelEncoder):
     model = Shoe
-    properties = ["manufacturer", "model_name","id"]
+    properties = ["manufacturer", "model_name","id", "color"]
 
     def get_extra_data(self, o):
         return {"bin": o.bin.closet_name}
